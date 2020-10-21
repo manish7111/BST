@@ -17,6 +17,7 @@ namespace HashTables
             this.RightTree = null;
         }
         int leftCount = 0, rightCount = 0;
+        bool result = false;
         public void Insert(T item)
         {
             T currentNodeValue = this.NodeData;
@@ -54,30 +55,32 @@ namespace HashTables
         {
            Console.WriteLine("Size"+" "+(1 + this.leftCount + this.rightCount));
         }
-        public bool IfNodeExists(int key)
+        public bool IfExists(T element, BinarySearchTree<T> node)
         {
-            if (this.NodeData.Equals(key))
+            
+            if (node == null)
             {
-                return true;
+                return false;
             }
-            while (this.LeftTree != null)
+            if (node.NodeData.Equals(element))
             {
-                if (this.LeftTree.NodeData.Equals(key))
-                {
-                    
-                    return true;
-                }
-                this.LeftTree.IfNodeExists(key);
+                Console.WriteLine("Found the element in BST" + " " + node.NodeData);
+                result = true;
             }
-            while (this.RightTree != null)
+            else
             {
-                if (this.RightTree.NodeData.Equals(key))
-                {
-                    return true;
-                }
-                this.RightTree.IfNodeExists(key);
+                Console.WriteLine("Current element is {0} in BST", node.NodeData);
+               
             }
-            return false;
+            if (element.CompareTo(node.NodeData) < 0)
+            {
+                IfExists(element, node.LeftTree);
+            }
+            if (element.CompareTo(node.NodeData) > 0)
+            {
+                IfExists(element, node.RightTree);
+            }
+            return result ;
         }
     }
 }

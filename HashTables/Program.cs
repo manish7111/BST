@@ -22,7 +22,7 @@ namespace HashTables
             binarySearch.Insert(67);
             binarySearch.Display();
             binarySearch.GetSize();
-            bool result=binarySearch.IfNodeExists(67);
+            bool result= binarySearch.IfExists(67, binarySearch);
             Console.WriteLine(result);
         }
     }
